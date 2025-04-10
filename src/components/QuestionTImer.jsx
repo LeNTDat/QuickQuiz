@@ -6,8 +6,6 @@ export default function QuestionTimer({ timer, onTimerOut }) {
     
     const FRAMEPERSECOND = timer / 166.67;
     useEffect(()=>{
-        console.log(timer);
-        
         const timerCount = setTimeout(onTimerOut, timer);
         return ()=>{
             clearTimeout(timerCount)
