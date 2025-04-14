@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 
-export default function QuestionTimer({ timer, onTimerOut }) {
+export default function QuestionTimer({ timer, onTimerOut, mode }) {
     const [remainingTime, setRemainingTime] = useState(timer)
-    
+
     const FRAMEPERSECOND = timer / 166.67;
-    useEffect(()=>{
+    useEffect(() => {
         const timerCount = setTimeout(onTimerOut, timer);
-        return ()=>{
+        return () => {
             clearTimeout(timerCount)
         }
     }, [timer, onTimerOut])
@@ -18,12 +18,17 @@ export default function QuestionTimer({ timer, onTimerOut }) {
             setRemainingTime(prev => (prev - FRAMEPERSECOND))
         }, FRAMEPERSECOND)
 
-        return ()=>{
+        return () => {
             clearInterval(intervalTimer)
         }
     }, [])
 
 
 
-    return <progress  max={timer} value={remainingTime} id="question-time" />
+    return <progress
+        max={timer}
+        value={remainingTime}
+        id="question-time"
+        className={mode}
+    />
 } 
